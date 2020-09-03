@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.gitignore
 
 # C extensions
 *.so
@@ -96,6 +97,8 @@ celerybeat-schedule
 
 # SageMath parsed files
 *.sage.py
+
+.idea/
 
 # Environments
 .env
