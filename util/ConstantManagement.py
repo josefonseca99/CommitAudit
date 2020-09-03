@@ -49,6 +49,6 @@ INTERRUPTION_STRING = "Si desea volver a realizar la ejecución ingrese cualquie
 EXCEL_FILE_NAME = "Auditoria_Azure_Repos.xlsx"
 EXCEL_ANALYSTS = "analysts.xlsx"
 
-HEADER_VALUES = ["Correo del analista", "Nro de veces comprometido en historias de tipo \"Habilitador\"", "Nro de veces comprometido en historias de tipo \"User Story\"", "Nro de \"bugs\"","Nro de historias con estado \"New\"",
-                 "Nro de historias con estado \"Active\"", "Nro de historias con estado \"Closed\"", "Nro de historias con estado \"Impedimento\"", "Comprometido a X historias de usuario",
+HEADER_VALUES = ["Sprint", "Nombre del analista", "Habilitadores", "Historias de Usuario", "Bug", "Estado \"New\"",
+                 "Estado \"Active\"", "Estado \"Closed\"", "Estado \"Impedimento\"", "Comprometido a X historias de usuario",
                  "No puntuadas", "Numero de pull requests", "Numero de commits"]

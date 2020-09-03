@@ -34,7 +34,7 @@ class ExtractUSData:
             "closed_state": 0,
             "impediment_state": 0,
             "engaged_to": 0,
-            "no_scored": []
+            "no_scored": 0
         }
         if us_id_list != [] and analyst_email is not None:
             try:
@@ -70,7 +70,7 @@ class ExtractUSData:
                             self.user_dict["engaged_to"] += value["fields"]["Microsoft.VSTS.Scheduling.StoryPoints"]
 
                         if "Microsoft.VSTS.Scheduling.StoryPoints" not in value["fields"].keys():
-                            self.user_dict["no_scored"].append(value["id"])
+                            self.user_dict["no_scored"] += 1
 
             except:
                 pass
