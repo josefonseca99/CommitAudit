@@ -126,3 +126,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Files
+Auditoria_Azure_Repos.xlsx

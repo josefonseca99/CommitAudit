@@ -50,5 +50,5 @@ EXCEL_FILE_NAME = "Auditoria_Azure_Repos.xlsx"
 EXCEL_ANALYSTS = "analysts.xlsx"
 
 HEADER_VALUES = ["Sprint", "Nombre del analista", "Habilitadores", "Historias de Usuario", "Bug", "Estado \"New\"",
-                 "Estado \"Active\"", "Estado \"Closed\"", "Estado \"Impedimento\"", "Comprometido a X historias de usuario",
-                 "No puntuadas", "Numero de pull requests", "Numero de commits"]
+                 "Estado \"Active\"", "Estado \"Closed\"", "Estado \"Impedimento\"", "Comprometido a N° historias de usuario",
+                 "No puntuadas", "Pull requests", "Commits"]
