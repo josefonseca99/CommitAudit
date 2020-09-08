@@ -1,5 +1,5 @@
 from tasks import ExtractSprintAttachtment, ExtractCommitAttachment, ExtractPullRequestAttachment, ExtractUSData, \
-    ExtractUSIDS
+    ExtractUSIDS, ExtractCodeSmells, ExtractTechnicalDebt
 from util import GetExcelAnalysts
 
 
@@ -27,22 +27,48 @@ class GetAnalystsTasks:
             self.us_data = ExtractUSData.ExtractUSData(identf_list, x["email"]).get_analyst_data()
             self.analysts_data.update(self.us_data)
             self.pullattch = ExtractPullRequestAttachment.ExtractPullRequestAttachment(
-                x["repository"].replace(" ", "%20"),
+                x["repository"],
                 x["email"],
                 self.sprint_attch.start_date,
                 self.sprint_attch.finish_date).pull_requests_number()
             self.analysts_data["pull_data"] = self.pullattch
             self.commit_attch = ExtractCommitAttachment.ExtractCommitAttachment(self.sprint_attch.start_date,
                                                                                 self.sprint_attch.finish_date,
-                                                                                x["email"], x["repository"].replace(" ",
-                                                                                                                    "%20")).get_commit_number()
+                                                                                x["email"],
+                                                                                x["repository"]).get_commit_number()
             self.analysts_data["commit_data"] = self.commit_attch
+
+            self.technical_debt = ExtractTechnicalDebt.ExtractTechnicalDebt(x["repository"]).get_technical_debt_time()
+            self.analysts_data["technical_debt"] = self.technical_debt
+
+            self.code_smells = ExtractCodeSmells.ExtractCodeSmells(x["repository"]).get_code_smells_time()
+            self.analysts_data["code_smells"] = self.code_smells
 
             if self.sprint_attch.sprint_id is not None and self.sprint_attch.start_date is not None:
                 analyst_index = analyst_in_dict_list(self.data_collection, x["email"])
                 if analyst_index is not None:
-                    self.data_collection[analyst_index]['pull_data'] += self.analysts_data['pull_data']
-                    self.data_collection[analyst_index]['commit_data'] += self.analysts_data['commit_data']
+
+                    if isinstance(self.data_collection[analyst_index]['pull_data'], int):
+                        self.data_collection[analyst_index]['pull_data'] += self.analysts_data['pull_data']
+                        self.data_collection[analyst_index]['commit_data'] += self.analysts_data['commit_data']
+                    else:
+                        if isinstance(self.analysts_data["pull_data"], int):
+                            self.data_collection[analyst_index]['pull_data'] = self.analysts_data['pull_data']
+                            self.data_collection[analyst_index]['commit_data'] = self.analysts_data['commit_data']
+
+                    if isinstance(self.data_collection[analyst_index]['technical_debt'], int):
+                        self.data_collection[analyst_index]['technical_debt'] += self.analysts_data['technical_debt']
+                    else:
+                        if isinstance(self.data_collection[analyst_index]['technical_debt'], int):
+                            self.data_collection[analyst_index]['technical_debt'] = self.analysts_data[
+                                'technical_debt']
+
+                    if isinstance(self.data_collection[analyst_index]['code_smells'], int):
+                        self.data_collection[analyst_index]['code_smells'] += self.analysts_data['code_smells']
+                    else:
+                        if isinstance(self.data_collection[analyst_index]['code_smells'], int):
+                            self.data_collection[analyst_index]['code_smells'] = self.analysts_data[
+                                'code_smells']
 
                 else:
                     self.data_collection.append(self.analysts_data)

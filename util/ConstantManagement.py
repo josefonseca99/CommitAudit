@@ -31,6 +31,15 @@ COMMIT_STATUS_ATTACHMENT_REQUEST_1 = "https://dev.azure.com/{}/{}" \
                                      "/_apis/git/repositories/{}/pullrequests?searchCriteria" \
                                      ".status=completed&$top=1000000"
 
+# Constante para obtener la deuda técnica SONAR
+
+TECHNICAL_DEBT_REQUEST = "http://sonar.bancolombia.corp/sonarbc/api/measures/component?component={" \
+                         "}&metricKeys=sqale_index "
+
+# Constante para obtener el code smell
+
+CODE_SMELL_REQUEST = "http://sonar.bancolombia.corp/sonarbc/api/measures/component?component={}&metricKeys=code_smells"
+
 # Constantes para el archivo de auditoria
 EXCEL_FILE_NAME = "Auditoria_Azure_Repos"
 
@@ -50,5 +59,5 @@ EXCEL_FILE_NAME = "Auditoria_Azure_Repos.xlsx"
 EXCEL_ANALYSTS = "analysts.xlsx"
 
 HEADER_VALUES = ["Sprint", "Nombre del analista", "Habilitadores", "Historias de Usuario", "Bug", "Estado \"New\"",
-                 "Estado \"Active\"", "Estado \"Closed\"", "Estado \"Impedimento\"", "Comprometido a N° historias de usuario",
-                 "No puntuadas", "Pull requests", "Commits"]
+                 "Estado \"Active\"", "Estado \"Closed\"", "Estado \"Impedimento\"", "Puntos de Historia realizados",
+                 "No puntuadas", "Pull requests", "Commits", "Deuda téctina\n(Minutos)", "Code Smell\n(Minutos)"]

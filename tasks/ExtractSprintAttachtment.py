@@ -1,13 +1,19 @@
 import base64
 import urllib
+import re
 
 from util import ConstantManagement
 from model import SprintData
 import json
 
 
+def find_sprint_coincidence(sprint_query_value, input_sprint):
+    x = re.findall(ConstantManagement.US_NUMBER_STR.format(input_sprint),sprint_query_value)
+    return bool(x)
+
+
 class ExtractSprintAttachment:
-    def __init__(self, cell_name=None, sprint_number=None,project_name="b267af7c-3233-4ad1-97b3-91083943100d",
+    def __init__(self, cell_name=None, sprint_number=None, project_name="b267af7c-3233-4ad1-97b3-91083943100d",
                  organization="grupobancolombia"):
 
         self.cell_name = cell_name
@@ -25,16 +31,16 @@ class ExtractSprintAttachment:
                                        self.project_name,
                                        self.cell_name)
 
-        self.request = urllib.request.Request(self.items_request, headers=self.headers)
-
         try:
+            self.request = urllib.request.Request(self.items_request, headers=self.headers)
             self.opener = urllib.request.build_opener()
             self.response = json.load(self.opener.open(self.request))
             for x in self.response["value"]:
-                if x["name"] == ConstantManagement.US_NUMBER_STR.format(self.sprint_number):
+                if find_sprint_coincidence(x["name"], self.sprint_number):
                     self.sprint_data.sprint_id = x["id"]
                     self.sprint_data.start_date = x["attributes"]["startDate"].split("T")[0]
                     self.sprint_data.finish_date = x["attributes"]["finishDate"].split("T")[0]
+                    break
                 else:
                     pass
 

@@ -1,11 +1,9 @@
 import os
 import xlsxwriter
 import openpyxl
-import pandas
 from openpyxl.styles import Alignment
 from util import ConstantManagement, GetAnalystsTasks, ExtractPath
 from openpyxl.styles.borders import Border, Side
-from openpyxl import styles
 
 
 def end_of_file_position():
@@ -68,6 +66,8 @@ class CreateExcel:
             self.sheet.write(row + 1, 10, str(analysts_tasks_list[row]["no_scored"]).strip("[]"), self.basic_format)
             self.sheet.write(row + 1, 11, analysts_tasks_list[row]["pull_data"], self.basic_format)
             self.sheet.write(row + 1, 12, analysts_tasks_list[row]["commit_data"], self.basic_format)
+            self.sheet.write(row + 1, 13, analysts_tasks_list[row]["technical_debt"], self.basic_format)
+            self.sheet.write(row + 1, 14, analysts_tasks_list[row]["code_smells"], self.basic_format)
 
     def update_audit_file(self):
         task_list_creation = GetAnalystsTasks.GetAnalystsTasks(self.sprint_number)
@@ -104,6 +104,8 @@ class CreateExcel:
                            value=str(analysts_tasks_list[file_row]["no_scored"]).strip("[]"))
             worksheet.cell(row=row_position, column=12, value=analysts_tasks_list[file_row]["pull_data"])
             worksheet.cell(row=row_position, column=13, value=analysts_tasks_list[file_row]["commit_data"])
+            worksheet.cell(row=row_position, column=14, value=analysts_tasks_list[file_row]["technical_debt"])
+            worksheet.cell(row=row_position, column=15, value=analysts_tasks_list[file_row]["code_smells"])
 
             for file_column in range(1, len(ConstantManagement.HEADER_VALUES)+1):
                 worksheet.cell(row=row_position, column=file_column).border = thin_border

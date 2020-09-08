@@ -3,4 +3,3 @@ urllib3==1.23
 openpyxl==3.0.1
 tkcalendar==1.5.1
 appJar==0.94
-pandas==1.1.1

@@ -25,10 +25,9 @@ class ExtractUSIDS:
                                        self.cell_name,
                                        self.iteration_id
                                        )
-
-        self.request = urllib.request.Request(self.items_request, headers=self.headers)
         if self.iteration_id is not None and self.cell_name is not None:
             try:
+                self.request = urllib.request.Request(self.items_request, headers=self.headers)
                 self.opener = urllib.request.build_opener()
                 self.response = json.load(self.opener.open(self.request))
                 for x in self.response["workItemRelations"]:
