@@ -60,4 +60,4 @@ EXCEL_ANALYSTS = "analysts.xlsx"
 
 HEADER_VALUES = ["Sprint", "Nombre del analista", "Habilitadores", "Historias de Usuario", "Bug", "Estado \"New\"",
                  "Estado \"Active\"", "Estado \"Closed\"", "Estado \"Impedimento\"", "Puntos de Historia realizados",
-                 "No puntuadas", "Pull requests", "Commits", "Deuda téctina\n(Minutos)", "Code Smell\n(Minutos)"]
+                 "Tareas", "Pull requests", "Commits", "Deuda téctina\n(Minutos)", "Code Smell\n(Minutos)"]
