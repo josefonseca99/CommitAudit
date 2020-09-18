@@ -3,6 +3,7 @@ import urllib
 import re
 
 from util import ConstantManagement
+from config_files import APIConfiguration
 from model import SprintData
 import json
 
@@ -13,13 +14,13 @@ def find_sprint_coincidence(sprint_query_value, input_sprint):
 
 
 class ExtractSprintAttachment:
-    def __init__(self, cell_name=None, sprint_number=None, project_name="b267af7c-3233-4ad1-97b3-91083943100d",
-                 organization="grupobancolombia"):
+    def __init__(self, cell_name=None, sprint_number=None):
 
         self.cell_name = cell_name
         self.sprint_number = sprint_number
-        self.project_name = project_name.replace(" ", "%20")
-        self.organization = organization
+        self.azure_dev_link = APIConfiguration.AZURE_DEV_LINK
+        self.project_name = APIConfiguration.PROJECT.replace(" ", "%20")
+        self.organization = APIConfiguration.ORGANIZATION
         self.sprint_data = SprintData.SprintData()
         self.access_token = ConstantManagement.CREDENTIALS
         self.headers = {}
@@ -27,7 +28,8 @@ class ExtractSprintAttachment:
         self.headers['Content-type'] = "application/json"
         self.headers['Authorization'] = b'Basic ' + base64.b64encode(self.access_token.encode('utf-8'))
         self.items_request = (ConstantManagement.US_ATTACHMENT_REQUEST_1
-                              ).format(self.organization,
+                              ).format(self.azure_dev_link,
+                                       self.organization,
                                        self.project_name,
                                        self.cell_name)
 

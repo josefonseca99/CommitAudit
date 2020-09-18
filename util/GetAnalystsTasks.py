@@ -71,6 +71,7 @@ class GetAnalystsTasks:
                                 'code_smells']
 
                 else:
+                    print(self.analysts_data)
                     self.data_collection.append(self.analysts_data)
 
     def get_data_collection(self):

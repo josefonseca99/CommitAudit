@@ -2,6 +2,7 @@ import base64
 import urllib.request
 
 from util import ConstantManagement
+from config_files import APIConfiguration
 import json
 
 
@@ -10,8 +11,9 @@ class ExtractUSIDS:
                  organization="grupobancolombia"):
 
         self.cell_name = cell_name
-        self.project_name = project_name
-        self.organization = organization
+        self.azure_dev_link = APIConfiguration.AZURE_DEV_LINK
+        self.project_name = APIConfiguration.PROJECT
+        self.organization = APIConfiguration.ORGANIZATION
         self.iteration_id = iteration_id
         self.access_token = ConstantManagement.CREDENTIALS
         self.headers = {}
@@ -20,7 +22,8 @@ class ExtractUSIDS:
         self.headers['Content-type'] = "application/json"
         self.headers['Authorization'] = b'Basic ' + base64.b64encode(self.access_token.encode('utf-8'))
         self.items_request = (ConstantManagement.USID_ATTACHMENT_REQUEST_1
-                              ).format(self.organization,
+                              ).format(self.azure_dev_link,
+                                       self.organization,
                                        self.project_name,
                                        self.cell_name,
                                        self.iteration_id

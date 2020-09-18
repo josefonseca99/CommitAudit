@@ -2,6 +2,7 @@ import base64
 import urllib.request
 
 from util import ConstantManagement
+from config_files import APIConfiguration
 import json
 
 
@@ -13,17 +14,23 @@ class ExtractCommitAttachment:
         self.username = username
 
         if repository is not None and repository != '':
+            self.azure_dev_link = APIConfiguration.AZURE_DEV_LINK
+            self.organization = APIConfiguration.ORGANIZATION
+            self.project = APIConfiguration.PROJECT
             self.repository_name = repository.replace(" ", "%20")
             self.access_token = ConstantManagement.CREDENTIALS
             self.headers = {}
             self.commit_dict = {}
             self.headers['Content-type'] = "application/json"
             self.headers['Authorization'] = b'Basic ' + base64.b64encode(self.access_token.encode('utf-8'))
-            self.items_request = (ConstantManagement.ATTACHMENT_REQUEST_1 \
-                                  + ConstantManagement.FROM_DATE_REQUEST \
-                                  + ConstantManagement.TO_DATE_REQUEST \
-                                  + ConstantManagement.USERNAME \
-                                  + ConstantManagement.ATTACHMENT_REQUEST_2).format(self.repository_name,
+            self.items_request = (ConstantManagement.ATTACHMENT_REQUEST_1
+                                  + ConstantManagement.FROM_DATE_REQUEST
+                                  + ConstantManagement.TO_DATE_REQUEST
+                                  + ConstantManagement.USERNAME
+                                  + ConstantManagement.ATTACHMENT_REQUEST_2).format(self.azure_dev_link,
+                                                                                    self.organization,
+                                                                                    self.project,
+                                                                                    self.repository_name,
                                                                                     self.from_date,
                                                                                     self.to_date,
                                                                                     self.username)

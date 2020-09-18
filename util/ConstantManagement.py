@@ -4,8 +4,7 @@ CREDENTIALS = ":zinwcppehv5zwic2owfmruhesg3ybavczj6fq7zzgk5hecktz6pa"
 
 # Constantes para los commits
 
-ATTACHMENT_REQUEST_1 = "https://dev.azure.com/grupobancolombia/b267af7c-3233-4ad1-97b3-91083943100d/_apis/git" \
-                       "/repositories/{}/commits?"
+ATTACHMENT_REQUEST_1 = "https://{}/{}/{}/_apis/git/repositories/{}/commits?"
 ATTACHMENT_REQUEST_2 = "api-version=5.1"
 FROM_DATE_REQUEST = "searchCriteria.fromDate={}&"
 TO_DATE_REQUEST = "searchCriteria.toDate={}&"
@@ -13,21 +12,21 @@ USERNAME = "searchCriteria.user={}&"
 
 # Constantes para obtener historias por sprints
 
-US_ATTACHMENT_REQUEST_1 = "https://dev.azure.com/{}/{}/{}/_apis/work/teamsettings/iterations?api-version=5.1"
+US_ATTACHMENT_REQUEST_1 = "https://{}/{}/{}/{}/_apis/work/teamsettings/iterations?api-version=5.1"
 US_NUMBER_STR = "Sprint {}"
 
 # Constantes para obtener informacion por código de historia de usuario
 
-US_ID_ATTACHMENT_REQUEST = "https://dev.azure.com/{}/{}/_apis/wit/workitems?ids={}&api-version=5.1"
+US_ID_ATTACHMENT_REQUEST = "https://{}/{}/{}/_apis/wit/workitems?ids={}&api-version=5.1"
 
 # Constante para obtener la lista de historias de usuario por proyecto
 
-USID_ATTACHMENT_REQUEST_1 = "https://dev.azure.com/{}/{}/{}/_apis/work/teamsettings/iterations/{" \
+USID_ATTACHMENT_REQUEST_1 = "https://{}/{}/{}/{}/_apis/work/teamsettings/iterations/{" \
                             "}/workitems?api-version=5.1-preview.1 "
 
 # Constante para obtener los commit con status completed
 
-COMMIT_STATUS_ATTACHMENT_REQUEST_1 = "https://dev.azure.com/{}/{}" \
+COMMIT_STATUS_ATTACHMENT_REQUEST_1 = "https://{}/{}/{}" \
                                      "/_apis/git/repositories/{}/pullrequests?searchCriteria" \
                                      ".status=completed&$top=1000000"
 
