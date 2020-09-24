@@ -1,6 +1,6 @@
 import base64
 import urllib.request
-
+from config_files import APIConfiguration
 from util import ConstantManagement
 from config_files import APIConfiguration
 from datetime import date, datetime
@@ -23,7 +23,7 @@ class ExtractPullRequestAttachment:
                 self.start_date = datetime.strptime(start_date, self.date_format)
                 self.finish_date = datetime.strptime(finish_date, self.date_format)
                 self.closed_date = ""
-                self.access_token = ConstantManagement.CREDENTIALS
+                self.access_token = APIConfiguration.BANCOLOMBIA_API_TOKEN
                 self.headers = {}
                 self.commit_dict = {}
                 self.headers['Content-type'] = "application/json"

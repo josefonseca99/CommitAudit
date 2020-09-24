@@ -1,21 +1,19 @@
 import base64
 import urllib.request
-
 from util import ConstantManagement
 from config_files import APIConfiguration
 import json
 
 
 class ExtractUSIDS:
-    def __init__(self, cell_name=None, iteration_id=None, project_name="b267af7c-3233-4ad1-97b3-91083943100d",
-                 organization="grupobancolombia"):
+    def __init__(self, cell_name=None, iteration_id=None):
 
         self.cell_name = cell_name
         self.azure_dev_link = APIConfiguration.AZURE_DEV_LINK
         self.project_name = APIConfiguration.PROJECT
         self.organization = APIConfiguration.ORGANIZATION
         self.iteration_id = iteration_id
-        self.access_token = ConstantManagement.CREDENTIALS
+        self.access_token = APIConfiguration.BANCOLOMBIA_API_TOKEN
         self.headers = {}
         self.US_IDS = []
         self.commit_dict = {}

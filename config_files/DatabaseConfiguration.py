@@ -1,10 +1,6 @@
-DATABASES = {
-    'default': {
-        'ENGINE': '',
-        'NAME': '',
-        'USER': '',
-        'HOST': '',
-        'PASSWORD': '',
-        'PORT': '',
-    }
+DATABASE = {
+    'HOST_DIRECTION': 'localhost',
+    'DB_USERNAME': 'root',
+    'PASSWORD': 'qvmysql',
+    'DATABASE': 'rendimientobbia',
 }

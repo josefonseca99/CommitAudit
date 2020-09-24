@@ -1,6 +1,5 @@
 import base64
 import urllib.request
-
 from util import ConstantManagement
 from config_files import  APIConfiguration
 import json
@@ -15,7 +14,7 @@ class ExtractUSData:
         self.analyst_email = analyst_email
         self.separator = ","
         self.us_id_list_string = self.separator.join(us_id_list)
-        self.access_token = ConstantManagement.CREDENTIALS
+        self.access_token = APIConfiguration.BANCOLOMBIA_API_TOKEN
         self.headers = {}
         self.commit_dict = {}
         self.headers['Content-type'] = "application/json"

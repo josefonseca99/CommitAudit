@@ -1,7 +1,7 @@
 import base64
 import urllib.request
 from urllib.error import URLError
-
+from config_files import APIConfiguration
 from util import ConstantManagement
 import json
 
@@ -10,7 +10,7 @@ class ExtractCodeSmells:
     def __init__(self, repo_name=None):
         if repo_name is not None and repo_name != '':
             self.repo_name = repo_name.replace(" ", "%20")
-            self.access_token = ConstantManagement.CREDENTIALS
+            self.access_token = APIConfiguration.BANCOLOMBIA_API_TOKEN
             self.headers = {}
             self.commit_dict = {}
             self.headers['Content-type'] = "application/json"

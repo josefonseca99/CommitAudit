@@ -3,3 +3,4 @@ urllib3==1.23
 openpyxl==3.0.1
 tkcalendar==1.5.1
 appJar==0.94
+mysql-connector-python==8.0.21

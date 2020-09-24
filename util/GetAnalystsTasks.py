@@ -24,14 +24,17 @@ class GetAnalystsTasks:
 
             self.us_identf = ExtractUSIDS.ExtractUSIDS(cell_value, self.sprint_attch.sprint_id).get_uids_list()
             identf_list = list(map(str, self.us_identf))
+
             self.us_data = ExtractUSData.ExtractUSData(identf_list, x["email"]).get_analyst_data()
             self.analysts_data.update(self.us_data)
+
             self.pullattch = ExtractPullRequestAttachment.ExtractPullRequestAttachment(
                 x["repository"],
                 x["email"],
                 self.sprint_attch.start_date,
                 self.sprint_attch.finish_date).pull_requests_number()
             self.analysts_data["pull_data"] = self.pullattch
+
             self.commit_attch = ExtractCommitAttachment.ExtractCommitAttachment(self.sprint_attch.start_date,
                                                                                 self.sprint_attch.finish_date,
                                                                                 x["email"],
@@ -71,8 +74,10 @@ class GetAnalystsTasks:
                                 'code_smells']
 
                 else:
-                    print(self.analysts_data)
                     self.data_collection.append(self.analysts_data)
 
     def get_data_collection(self):
         return self.data_collection
+
+    def get_sprint_final_date(self):
+        return self.sprint_attch.finish_date

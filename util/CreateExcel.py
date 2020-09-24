@@ -4,6 +4,7 @@ import openpyxl
 from openpyxl.styles import Alignment
 from util import ConstantManagement, GetAnalystsTasks, ExtractPath
 from openpyxl.styles.borders import Border, Side
+from database_tasks import SaveAuditDataDB
 
 
 def end_of_file_position():
@@ -52,6 +53,8 @@ class CreateExcel:
         task_list_creation.collect_data()
         analysts_tasks_list = task_list_creation.get_data_collection()
 
+        final_sprint_date = task_list_creation.get_sprint_final_date()
+
         for row in range(0, len(analysts_tasks_list)):
             self.sheet.write(row + 1, 0, self.sprint_number, self.basic_format)
             self.sheet.write(row + 1, 1, analysts_tasks_list[row]["analyst_name"], self.basic_format)
@@ -69,10 +72,14 @@ class CreateExcel:
             self.sheet.write(row + 1, 13, analysts_tasks_list[row]["technical_debt"], self.basic_format)
             self.sheet.write(row + 1, 14, analysts_tasks_list[row]["code_smells"], self.basic_format)
 
+        SaveAuditDataDB.save_audit_data(analysts_tasks_list, self.sprint_number, final_sprint_date)
+
     def update_audit_file(self):
         task_list_creation = GetAnalystsTasks.GetAnalystsTasks(self.sprint_number)
         task_list_creation.collect_data()
         analysts_tasks_list = task_list_creation.get_data_collection()
+
+        final_sprint_date = task_list_creation.get_sprint_final_date()
 
         excel_file = openpyxl.load_workbook(ExtractPath.relative_path(ConstantManagement.EXCEL_FILE_NAME))
         sheet_name = excel_file.sheetnames[0]
@@ -113,3 +120,5 @@ class CreateExcel:
 
         excel_file.save(ExtractPath.relative_path(ConstantManagement.EXCEL_FILE_NAME))
         excel_file.close()
+
+        SaveAuditDataDB.save_audit_data(analysts_tasks_list, self.sprint_number, final_sprint_date)

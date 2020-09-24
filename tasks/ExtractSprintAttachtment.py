@@ -1,7 +1,6 @@
 import base64
 import urllib
 import re
-
 from util import ConstantManagement
 from config_files import APIConfiguration
 from model import SprintData
@@ -22,7 +21,7 @@ class ExtractSprintAttachment:
         self.project_name = APIConfiguration.PROJECT.replace(" ", "%20")
         self.organization = APIConfiguration.ORGANIZATION
         self.sprint_data = SprintData.SprintData()
-        self.access_token = ConstantManagement.CREDENTIALS
+        self.access_token = APIConfiguration.BANCOLOMBIA_API_TOKEN
         self.headers = {}
         self.commit_dict = {}
         self.headers['Content-type'] = "application/json"
