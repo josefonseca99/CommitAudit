@@ -35,16 +35,17 @@ class ExtractPullRequestAttachment:
                                                self.repo_name)
 
                 self.request = urllib.request.Request(self.items_request, headers=self.headers)
-                self.opener = urllib.request.build_opener()
-                self.response = json.load(self.opener.open(self.request))
+
                 try:
+                    self.opener = urllib.request.build_opener()
+                    self.response = json.load(self.opener.open(self.request))
                     for x in self.response["value"]:
                         closed_date = datetime.strptime(x["closedDate"].split("T")[0], self.date_format)
                         if self.start_date <= closed_date <= self.finish_date:
                             if x["createdBy"]["uniqueName"] == self.analyst_email:
                                 self.analyst_counter += 1
                 except:
-                    pass
+                    self.analyst_counter = 'Sin datos de repositorio'
             else:
                 self.analyst_counter = 'Sin datos de repositorio'
 
