@@ -44,7 +44,7 @@ class ExtractUSData:
                 self.response = json.load(self.opener.open(self.request))
                 for value in self.response["value"]:
 
-                    if value["fields"]["System.AssignedTo"]["uniqueName"] == self.analyst_email:
+                    if value["fields"]["System.AssignedTo"]["uniqueName"].lower() == self.analyst_email.lower():
 
                         if value["fields"]["System.WorkItemType"] == "Habilitador":
                             self.user_dict["enabler_type"] += 1

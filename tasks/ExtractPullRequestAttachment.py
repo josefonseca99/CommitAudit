@@ -42,7 +42,7 @@ class ExtractPullRequestAttachment:
                     for x in self.response["value"]:
                         closed_date = datetime.strptime(x["closedDate"].split("T")[0], self.date_format)
                         if self.start_date <= closed_date <= self.finish_date:
-                            if x["createdBy"]["uniqueName"] == self.analyst_email:
+                            if x["createdBy"]["uniqueName"].lower() == self.analyst_email.lower():
                                 self.analyst_counter += 1
                 except:
                     self.analyst_counter = 'Sin datos de repositorio'
