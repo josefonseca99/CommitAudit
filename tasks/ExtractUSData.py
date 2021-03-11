@@ -25,6 +25,9 @@ class ExtractUSData:
                                        self.project_name,
                                        self.us_id_list_string)
 
+        print("La url de : " + self.analyst_email + "es:")
+        print(self.items_request)
+
         self.user_dict = {
             "analyst_email": self.analyst_email,
             "enabler_type": 0,
@@ -43,6 +46,8 @@ class ExtractUSData:
                 self.opener = urllib.request.build_opener()
                 self.response = json.load(self.opener.open(self.request))
                 for value in self.response["value"]:
+
+                    print(value["fields"]["Microsoft.VSTS.Common.ActivatedBy"]["uniqueName"].lower() + "para el analista" + self.analyst_email)
 
                     if value["fields"]["System.AssignedTo"]["uniqueName"].lower() == self.analyst_email.lower():
 
@@ -72,6 +77,32 @@ class ExtractUSData:
 
                         if "Microsoft.VSTS.Scheduling.StoryPoints" not in value["fields"].keys():
                             self.user_dict["no_scored"] += 1
+
+                    if value["fields"]["Microsoft.VSTS.Common.ActivatedBy"]["uniqueName"].lower() == self.analyst_email.lower():
+
+                        print("se encontro el otro tipo de bug")
+
+                        if value["fields"]["System.WorkItemType"] == "Habilitador":
+                            self.user_dict["enabler_type"] += 1
+
+                        if value["fields"]["System.WorkItemType"] == "User Story":
+                            self.user_dict["user_story_type"] += 1
+
+                        if value["fields"]["System.WorkItemType"] == "Bug":
+                            self.user_dict["bug_type"] += 1
+
+                        if value["fields"]["System.State"] == "New":
+                            self.user_dict["new_state"] += 1
+
+                        if value["fields"]["System.State"] == "Active":
+                            self.user_dict["active_state"] += 1
+
+                        if value["fields"]["System.State"] == "Closed":
+                            self.user_dict["closed_state"] += 1
+
+                        if value["fields"]["System.State"] == "Impedimento":
+                            self.user_dict["impediment_state"] += 1
+
 
             except:
                 pass

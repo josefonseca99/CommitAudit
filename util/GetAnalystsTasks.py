@@ -51,7 +51,8 @@ class GetAnalystsTasks:
                 analyst_index = analyst_in_dict_list(self.data_collection, x["email"])
                 if analyst_index is not None:
 
-                    if isinstance(self.data_collection[analyst_index]['pull_data'], int):
+                    if isinstance(self.data_collection[analyst_index]['pull_data'], int) and isinstance(self.analysts_data['pull_data'], int):
+                        print(self.analysts_data['pull_data'])
                         self.data_collection[analyst_index]['pull_data'] += self.analysts_data['pull_data']
                         self.data_collection[analyst_index]['commit_data'] += self.analysts_data['commit_data']
                     else:
