@@ -128,4 +128,5 @@ dmypy.json
 .pyre/
 
 #Files
-Auditoria_Azure_Repos.xlsx
+.xlsx
+config_fi/DatabaseConfiguration
