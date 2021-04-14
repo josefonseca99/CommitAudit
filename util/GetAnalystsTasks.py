@@ -25,7 +25,7 @@ class GetAnalystsTasks:
             self.us_identf = ExtractUSIDS.ExtractUSIDS(cell_value, self.sprint_attch.sprint_id).get_uids_list()
             identf_list = list(map(str, self.us_identf))
 
-            self.us_data = ExtractUSData.ExtractUSData(identf_list, x["email"]).get_analyst_data()
+            self.us_data = ExtractUSData.ExtractUSData(identf_list, x["email"], x["cell"], x["repository"]).get_analyst_data()
             self.analysts_data.update(self.us_data)
 
             self.pullattch = ExtractPullRequestAttachment.ExtractPullRequestAttachment(
