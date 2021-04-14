@@ -45,9 +45,9 @@ class ExtractPullRequestAttachment:
                             if x["createdBy"]["uniqueName"].lower() == self.analyst_email.lower():
                                 self.analyst_counter += 1
                 except:
-                    self.analyst_counter = 'Sin datos de repositorio'
+                    self.analyst_counter += 0
             else:
-                self.analyst_counter = 'Sin datos de repositorio'
+                self.analyst_counter += 0
 
     def pull_requests_number(self):
         return self.analyst_counter
