@@ -25,8 +25,12 @@ class GetAnalystsTasks:
             self.us_identf = ExtractUSIDS.ExtractUSIDS(cell_value, self.sprint_attch.sprint_id).get_uids_list()
             identf_list = list(map(str, self.us_identf))
 
-            self.us_data = ExtractUSData.ExtractUSData(identf_list, x["email"], x["cell"], x["repository"]).get_analyst_data()
+            self.us_data = ExtractUSData.ExtractUSData(identf_list, x["email"], x["cell"],
+                                                       x["repository"]).get_analyst_data()
+            print("Antes de la suma se tiene", self.analysts_data)
+            print("se actualizará la data de", x["email"], "con:", self.us_data)
             self.analysts_data.update(self.us_data)
+            print("La suma del analista va en:", self.analysts_data)
 
             self.pullattch = ExtractPullRequestAttachment.ExtractPullRequestAttachment(
                 x["repository"],
