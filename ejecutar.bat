@@ -1,1 +1,1 @@
-./AnalystAudit.py
+python ./AnalystsAudit.py
