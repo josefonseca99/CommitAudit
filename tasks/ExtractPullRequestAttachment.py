@@ -33,7 +33,7 @@ class ExtractPullRequestAttachment:
                                                self.organization,
                                                self.project_name,
                                                self.repo_name)
-                print(self.items_request)
+                print('La url de los pull request para: ' + analyst_email + " es " + self.items_request)
                 self.request = urllib.request.Request(self.items_request, headers=self.headers)
 
                 try:

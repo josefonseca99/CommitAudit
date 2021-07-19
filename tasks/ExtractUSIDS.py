@@ -26,8 +26,7 @@ class ExtractUSIDS:
                                        self.cell_name,
                                        self.iteration_id
                                        )
-        print("Historias de usuario para el proyecto: " + self.project_name + "en el sprint:" + self.iteration_id)
-        print(self.items_request)
+
         if self.iteration_id is not None and self.cell_name is not None:
             try:
                 self.request = urllib.request.Request(self.items_request, headers=self.headers)
